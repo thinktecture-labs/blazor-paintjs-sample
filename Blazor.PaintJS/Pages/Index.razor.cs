@@ -69,7 +69,6 @@ namespace Blazor.PaintJS.Pages
         public async Task OnPointerUp()
         {
             _previousPoint = null;
-            await UpdateBage();
         }
 
         private async Task UpdateBage(bool reset = false)
@@ -143,6 +142,11 @@ namespace Blazor.PaintJS.Pages
         }
 
         #region Private
+        private async Task InternalPointerUp()
+        {
+            _previousPoint = null;
+            await UpdateBage();
+        }
 
         private async void OnPointerDown(PointerEventArgs args)
         {
@@ -283,6 +287,7 @@ namespace Blazor.PaintJS.Pages
             await context.FillStyleAsync("white");
             await context.FillRectAsync(0, 0, 600, 480);
             await context.FillStyleAsync("black");
+            await UpdateBage(true);
         }
 
         private async void OnColorChange(ChangeEventArgs args)
