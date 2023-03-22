@@ -12,6 +12,7 @@ using Thinktecture.Blazor.AsyncClipboard;
 using Thinktecture.Blazor.AsyncClipboard.Models;
 using Thinktecture.Blazor.FileHandling;
 using KristofferStrube.Blazor.FileSystem;
+using Thinktecture.Blazor.Badging;
 
 namespace Blazor.PaintJS.Pages
 {
@@ -21,6 +22,7 @@ namespace Blazor.PaintJS.Pages
         [Inject] private ImageService _imageService { get; set; } = default!;
         [Inject] private AsyncClipboardService _asyncClipboardService { get; set; } = default!;
         [Inject] private WebShareService _shareService { get; set; } = default!;
+        [Inject] private BadgingService _badgingService { get; set; } = default!;
         [Inject] private IFileSystemAccessService _fileSystemAccessService { get; set; } = default!;
         [Inject] private FileHandlingService _fileHandlingService { get; set; } = default!;
         [Inject] public IJSRuntime JS { get; set; } = default!;
@@ -57,14 +59,26 @@ namespace Blazor.PaintJS.Pages
         private bool _fileSystemAccessSupported = false;
         private bool _clipBoardApiSupported = false;
         private bool _sharedApiSupported = false;
+        private bool _badgeApiSupported = false;
         private Canvas? _canvas;
         private Point? _previousPoint;
+        private int _hasChanges = 0;
 
         // Method which is JSInvokable must be public
         [JSInvokable]
-        public void OnPointerUp()
+        public async Task OnPointerUp()
         {
             _previousPoint = null;
+            await UpdateBage();
+        }
+
+        private async Task UpdateBage(bool reset = false)
+        {
+            if (_badgeApiSupported)
+            {
+                _hasChanges = reset ? 0 : _hasChanges + 1;
+                await _badgingService.SetAppBadgeAsync(_hasChanges);
+            }
         }
 
         [JSInvokable]
@@ -76,6 +90,7 @@ namespace Blazor.PaintJS.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            _badgeApiSupported = await _badgingService.IsSupportedAsync();
             _fileSystemAccessSupported = await _fileSystemAccessService.IsSupportedAsync();
             _clipBoardApiSupported = await _asyncClipboardService.IsSupportedAsync();
             _sharedApiSupported = await _shareService.IsSupportedAsync();
@@ -224,6 +239,7 @@ namespace Blazor.PaintJS.Pages
             finally
             {
                 _fileHandle = null;
+                await UpdateBage(true);
             }
         }
 
