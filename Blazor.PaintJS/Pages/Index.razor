@@ -3,16 +3,14 @@
 <PageTitle>Index</PageTitle>
 
 <nav>
-    @if(_fileSystemAccessSupported) {
-        <button @onclick="OpenLocalFile">Open</button>
-        <button @onclick="SaveFileLocal">Save</button>
-    } else {
+    <!--Replace with file system API-->
         <InputFile OnChange="OpenFile"></InputFile>
         <button @onclick="DownloadFile">Download</button>
-    }
-    <button @onclick="Copy" disabled="@(!_clipBoardApiSupported)">Copy</button>
-    <button @onclick="Paste" disabled="@(!_clipBoardApiSupported)">Paste</button>
-    <button @onclick="Share" disabled="@(!_sharedApiSupported)">Share</button>
+
+    <!--Add supported request-->
+    <button @onclick="Copy">Copy</button>
+    <button @onclick="Paste">Paste</button>
+    <button @onclick="Share">Share</button>
     <button @onclick="ResetCanvas">Clean up</button>
     <input type="color" @onchange="OnColorChange">
 </nav>
