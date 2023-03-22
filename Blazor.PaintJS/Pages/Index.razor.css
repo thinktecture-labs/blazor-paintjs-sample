@@ -1,0 +1,12 @@
+﻿nav {
+    display: flex;
+    max-width: 600px;
+    gap: 0.25rem;
+}
+
+button, input[type="color"] {
+    height: 1.5rem;
+    flex: 1;
+}
+
+

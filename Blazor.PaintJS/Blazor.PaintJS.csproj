@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Excubo.Blazor.Canvas" Version="3.2.18" />
+    <PackageReference Include="KristofferStrube.Blazor.FileSystem" Version="0.3.0" />
+    <PackageReference Include="KristofferStrube.Blazor.FileSystemAccess" Version="3.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.4" PrivateAssets="all" />
+    <PackageReference Include="Thinktecture.Blazor.AsyncClipboard" Version="2.0.0" />
+    <PackageReference Include="Thinktecture.Blazor.Badging" Version="2.0.0" />
+    <PackageReference Include="Thinktecture.Blazor.FileHandling" Version="2.0.0" />
+    <PackageReference Include="Thinktecture.Blazor.WebShare" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\ImageService.js" />
+  </ItemGroup>
+
+</Project>

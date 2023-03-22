@@ -1,0 +1,29 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<nav>
+    @if(_fileSystemAccessSupported) {
+        <button @onclick="OpenLocalFile">Open</button>
+        <button @onclick="SaveFileLocal">Save</button>
+    } else {
+        <InputFile OnChange="OpenFile"></InputFile>
+        <button @onclick="DownloadFile">Download</button>
+    }
+    <button @onclick="Copy" disabled="@(!_clipBoardApiSupported)">Copy</button>
+    <button @onclick="Paste" disabled="@(!_clipBoardApiSupported)">Paste</button>
+    <button @onclick="Share" disabled="@(!_sharedApiSupported)">Share</button>
+    <button @onclick="ResetCanvas">Clean up</button>
+    <input type="color" @onchange="OnColorChange">
+</nav>
+
+<div style="width: 100%; height: 100%; overflow: hidden; touch-action: none;">
+    <Canvas @ref="_canvas"
+            id="paint-canvas"
+            @onpointerdown="OnPointerDown"
+            @onpointerup="OnPointerUp"
+            @onpointermove="OnPointerMove"
+            width="600"
+            height="480">
+    </Canvas>
+</div>

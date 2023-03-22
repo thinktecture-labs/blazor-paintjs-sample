@@ -1,0 +1,29 @@
+{
+  "name": "PaintJS",
+  "short_name": "PJS",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#808080",
+  "theme_color": "#000080",
+  "prefer_related_applications": false,
+  "file_handlers": [
+    {
+      "action": "./",
+      "accept": {
+        "image/png": [ ".png" ]
+      }
+    }
+  ],
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}
