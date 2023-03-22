@@ -66,7 +66,7 @@ namespace Blazor.PaintJS.Pages
 
         // Method which is JSInvokable must be public
         [JSInvokable]
-        public async Task OnPointerUp()
+        public void OnPointerUp()
         {
             _previousPoint = null;
         }
